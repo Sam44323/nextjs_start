@@ -14,14 +14,19 @@ export default function Form() {
       body: JSON.stringify({
         username,
         password
-      })
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then(response => response.json())
-    const token = res.token
-    console.log(token)
+    const token = res.token;
+    
     if (token) {
       const json = jwt.decode(token) as { [key: string]: string };
       console.log(json)
       setMessage(`Welcome ${json.username}, and you are ${json.admin ? 'an admin!' : 'not an admin!'}`)
+    } else {
+      setMessage('Something went wrong!')
     }
   }
 

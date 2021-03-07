@@ -8,12 +8,13 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
     res.status(404).end('Please enter a some value for authentication!');
     return;
   }
-  const { username, password } = JSON.parse(req.body);
+  const { username, password } = req.body;
+  console.log(username, password);
   res.status(200).json({
     token: jwt.sign(
       {
         username,
-        admin: username === 'admin' && password === 'somevalue',
+        admin: password === 'somevalue',
       },
       KEY,
       {
