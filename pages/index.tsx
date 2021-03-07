@@ -1,4 +1,4 @@
-import { useState, useCallback} from 'react';
+import { useState, useCallback, SyntheticEvent} from 'react';
 import styles from './index.module.css';
 import jwt from 'jsonwebtoken';
 
@@ -7,7 +7,7 @@ export default function Form() {
   const [password, setPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('You are not logged in!');
 
-  const submitForm = async (event: Event) => {
+  const submitForm = async (event: SyntheticEvent) => {
     event.preventDefault()
     const res = await fetch('http://localhost:3000/api/login', {
       method: "POST",
@@ -23,7 +23,6 @@ export default function Form() {
 
     if (token) {
       const json = jwt.decode(token) as { [key: string]: string };
-      console.log(json)
       setMessage(`Welcome ${json.username}, and you are ${json.admin ? 'an admin!' : 'not an admin!'}`)
     } else {
       setMessage('Something went wrong!')
