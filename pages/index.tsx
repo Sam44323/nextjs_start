@@ -7,7 +7,7 @@ export default function Form() {
   const [password, setPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('You are not logged in!');
 
-  const submitForm = async (event) => {
+  const submitForm = async (event: Event) => {
     event.preventDefault()
     const res = await fetch('http://localhost:3000/api/login', {
       method: "POST",
@@ -20,7 +20,7 @@ export default function Form() {
       }
     }).then(response => response.json())
     const token = res.token;
-    
+
     if (token) {
       const json = jwt.decode(token) as { [key: string]: string };
       console.log(json)
