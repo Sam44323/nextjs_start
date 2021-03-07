@@ -1,6 +1,7 @@
 import { useState, useCallback, SyntheticEvent} from 'react';
 import styles from './index.module.css';
 import jwt from 'jsonwebtoken';
+import Link from 'next/link';
 
 export default function Form() {
   const [username, setUserName] = useState<string>('');
@@ -30,6 +31,9 @@ export default function Form() {
   }
 
   return <div>
+    <Link href="/sega">SEGA</Link>
+    <hr/>
+    <Link href="/sega/sonic">SONIC</Link>
     <h1>{ message}</h1>
     <form >
     <input type="text" value={username} name="username" onChange={e => {
